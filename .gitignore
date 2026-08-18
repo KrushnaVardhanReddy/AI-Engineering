@@ -1,0 +1,19 @@
+node_modules/
+.DS_Store
+dist/
+.svelte-kit/
+test_gdal*
+static/gdal3.js/
+
+# Secrets — never commit
+.env.local
+.env*.local
+
+# Playwright generated artifacts
+playwright-report/
+test-results/
+dev-dist/
+build/
+ios/
+android/
+.venv/
