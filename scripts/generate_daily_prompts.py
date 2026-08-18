@@ -73,7 +73,7 @@ def generate_prompts():
             count += 1
             
             # Append to index
-            index_md += f"- [Day {day_num:02d}: {topic}](modules/day_{day_num:02d}.ipynb)\n"
+            index_md += f"- [Day {day_num:02d}: {topic}](day_{day_num:02d}.ipynb)\n"
             
         index_md += "\n"
             
