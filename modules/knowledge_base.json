@@ -1,0 +1,22 @@
+[
+    {
+        "id": "doc1",
+        "text": "The company handbook states that employees get 20 days of paid time off per year.",
+        "department": "HR"
+    },
+    {
+        "id": "doc2",
+        "text": "The backend microservices are built with Python and FastAPI, deployed on AWS ECS.",
+        "department": "Engineering"
+    },
+    {
+        "id": "doc3",
+        "text": "All customer refunds must be processed within 3 business days of approval.",
+        "department": "Support"
+    },
+    {
+        "id": "doc4",
+        "text": "Q3 revenue targets are set to 5 million USD, focusing on enterprise sales.",
+        "department": "Sales"
+    }
+]
