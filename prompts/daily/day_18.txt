@@ -21,4 +21,9 @@ This task is part of a 90-day curriculum. You are currently generating material 
 Today's Topic:
 Day 18: Implement Advanced Qdrant Operations: Use filtered searches and scroll APIs to manage large datasets.
 
-Please generate the complete learning material for Day 18 right now.
+Output Instructions:
+Please generate the complete learning material as a **Jupyter Notebook (.ipynb)**.
+Save the file at exactly: `modules/day_18.ipynb`
+The notebook should contain cleanly separated Markdown cells (for theory, explanations, and instructions) and executable Python Code cells (for implementations and the lab).
+
+Please generate the material right now.

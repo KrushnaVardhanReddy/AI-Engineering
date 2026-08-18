@@ -21,4 +21,9 @@ This task is part of a 90-day curriculum. You are currently generating material 
 Today's Topic:
 Day 90: **Career Branding:**  Finalize your GitHub READMEs for storytelling and update LinkedIn with your AI Engineering portfolio.
 
-Please generate the complete learning material for Day 90 right now.
+Output Instructions:
+Please generate the complete learning material as a **Jupyter Notebook (.ipynb)**.
+Save the file at exactly: `modules/day_90.ipynb`
+The notebook should contain cleanly separated Markdown cells (for theory, explanations, and instructions) and executable Python Code cells (for implementations and the lab).
+
+Please generate the material right now.

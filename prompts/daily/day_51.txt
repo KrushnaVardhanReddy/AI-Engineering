@@ -21,4 +21,9 @@ This task is part of a 90-day curriculum. You are currently generating material 
 Today's Topic:
 Day 51: Implement Agent "Hand-offs": Code the logic for a "Triage Agent" to pass a state to a "Technical Agent."
 
-Please generate the complete learning material for Day 51 right now.
+Output Instructions:
+Please generate the complete learning material as a **Jupyter Notebook (.ipynb)**.
+Save the file at exactly: `modules/day_51.ipynb`
+The notebook should contain cleanly separated Markdown cells (for theory, explanations, and instructions) and executable Python Code cells (for implementations and the lab).
+
+Please generate the material right now.

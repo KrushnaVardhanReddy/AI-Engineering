@@ -27,7 +27,12 @@ This task is part of a 90-day curriculum. You are currently generating material 
 Today's Topic:
 Day {day_num}: {topic}
 
-Please generate the complete learning material for Day {day_num} right now.
+Output Instructions:
+Please generate the complete learning material as a **Jupyter Notebook (.ipynb)**.
+Save the file at exactly: `modules/day_{day_num:02d}.ipynb`
+The notebook should contain cleanly separated Markdown cells (for theory, explanations, and instructions) and executable Python Code cells (for implementations and the lab).
+
+Please generate the material right now.
 """
 
 def generate_prompts():
@@ -40,6 +45,8 @@ def generate_prompts():
     chunks = content.split("#### ")
     
     count = 0
+    index_md = "## 📚 Modules Index\n\n"
+    
     for chunk in chunks:
         if "PHASE" not in chunk:
             continue
@@ -48,6 +55,8 @@ def generate_prompts():
         phase_name = lines[0].strip()
         # Remove the leading "2\. " or similar numbers
         phase_name = re.sub(r'^\d+\\.\s*', '', phase_name)
+        
+        index_md += f"### {phase_name}\n"
         
         pattern = r'\*\*Day\s+(\d+):\*\*\s+(.*?)(?=\*\*Day\s+\d+:\*\*|\*\*Foundational Checklist|\*\*Project Milestone|\*\*AI Security|\*\*Personal Branding|\Z)'
         matches = re.finditer(pattern, chunk, re.DOTALL)
@@ -63,7 +72,35 @@ def generate_prompts():
                 pf.write(prompt_content)
             count += 1
             
+            # Append to index
+            index_md += f"- [Day {day_num:02d}: {topic}](modules/day_{day_num:02d}.ipynb)\n"
+            
+        index_md += "\n"
+            
     print(f"Generated {count} daily prompts in {PROMPTS_DIR} with context.")
+    
+    # Generate index.ipynb
+    import json
+    notebook = {
+        "cells": [
+            {
+                "cell_type": "markdown",
+                "metadata": {},
+                "source": [line + "\n" for line in index_md.split("\n")]
+            }
+        ],
+        "metadata": {},
+        "nbformat": 4,
+        "nbformat_minor": 5
+    }
+    
+    if not os.path.exists("modules"):
+        os.makedirs("modules")
+        
+    with open("modules/index.ipynb", 'w', encoding='utf-8') as f:
+        json.dump(notebook, f, indent=2)
+        
+    print("Successfully generated modules/index.ipynb with the Modules Index.")
 
 if __name__ == "__main__":
     generate_prompts()

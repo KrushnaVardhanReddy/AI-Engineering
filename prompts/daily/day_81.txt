@@ -21,4 +21,9 @@ This task is part of a 90-day curriculum. You are currently generating material 
 Today's Topic:
 Day 81: Prepare a synthetic dataset for fine-tuning using an LLM to generate high-quality instruction-response pairs.
 
-Please generate the complete learning material for Day 81 right now.
+Output Instructions:
+Please generate the complete learning material as a **Jupyter Notebook (.ipynb)**.
+Save the file at exactly: `modules/day_81.ipynb`
+The notebook should contain cleanly separated Markdown cells (for theory, explanations, and instructions) and executable Python Code cells (for implementations and the lab).
+
+Please generate the material right now.

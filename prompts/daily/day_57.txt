@@ -21,4 +21,9 @@ This task is part of a 90-day curriculum. You are currently generating material 
 Today's Topic:
 Day 57: Setup  **Ragas**  and compute Faithfulness and Answer Relevancy for your RAG pipeline.
 
-Please generate the complete learning material for Day 57 right now.
+Output Instructions:
+Please generate the complete learning material as a **Jupyter Notebook (.ipynb)**.
+Save the file at exactly: `modules/day_57.ipynb`
+The notebook should contain cleanly separated Markdown cells (for theory, explanations, and instructions) and executable Python Code cells (for implementations and the lab).
+
+Please generate the material right now.
