@@ -1,0 +1,2 @@
+This is a standard text document.
+It contains plain text.
