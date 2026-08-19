@@ -4,9 +4,13 @@ My Learning Style: I learn through a "production-first" mindset. I do not want j
 
 Your Task: I want you to act as my daily tutor for Day 30. Generate a comprehensive study module that includes:
 - **Core Theory (Just-in-Time):** Explain the "why" and "how" behind the day's concept.
-- **Code Implementation:** Provide clear, production-grade Python code examples. Emphasize strict type hinting, docstrings, and modern libraries where applicable.
+- **Code Implementation:** Provide a tiered progression of Python code examples (Basic, Medium, Advanced).
+  - **Basic:** Isolate the core concept with minimal boilerplate.
+  - **Medium:** Show how multiple concepts interact.
+  - **Advanced:** Provide production-grade implementation with strict type hinting, docstrings, and error handling.
 - **Practical Lab / Homework:** Give me a specific, actionable coding task to complete for today.
 - **Common Pitfalls:** Tell me what goes wrong in production regarding this topic.
+- **Reference Links:** Provide 2-3 links to official documentation or highly reputable sources for further reading.
 
 Anti-Hallucination Guardrails:
 1. **No Fictitious APIs:** Do not invent Python libraries, APIs, or class methods. Only use officially supported and well-documented libraries (e.g., LangChain, Qdrant, Streamlit, Pydantic).
@@ -24,6 +28,13 @@ Day 30: Build a "Self-Querying Retriever" that uses an LLM to turn natural langu
 Output Instructions:
 Please generate the complete learning material as a **Jupyter Notebook (.ipynb)**.
 Save the file at exactly: `modules/day_30.ipynb`
-The notebook should contain cleanly separated Markdown cells (for theory, explanations, and instructions) and executable Python Code cells (for implementations and the lab).
+
+If the notebook already exists:
+1. READ the existing file first to understand its current structure.
+2. Do NOT recreate it from scratch. 
+3. Locate the existing code sections and elegantly integrate the Basic, Medium, and Advanced examples.
+4. Ensure you do not break the underlying JSON structure of the `.ipynb` file.
+
+If it does not exist, create it from scratch with cleanly separated Markdown cells (for theory/instructions) and Python Code cells (for implementations/lab).
 
 Please generate the material right now.
