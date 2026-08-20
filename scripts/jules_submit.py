@@ -6,6 +6,7 @@
 Usage:
   python3 scripts/jules_submit.py --day 1      # Submit Day 1 prompt
   python3 scripts/jules_submit.py --week 1     # Submit Week 1 (Days 1-7) prompts
+  python3 scripts/jules_submit.py --type cheatsheets --day 1 # Submit cheatsheet prompt
   python3 scripts/jules_submit.py --file path  # Submit a custom prompt from a file
   python3 scripts/jules_submit.py --branch feat# Target a specific branch
 """
@@ -102,18 +103,18 @@ def submit_prompt(full_prompt, task_name="Task"):
         print(f"❌ HTTP {e.code}: {e.read().decode()}")
         sys.exit(1)
 
-def submit_day(day_num):
-    prompt_file = f"prompts/daily/day_{day_num:02d}.txt"
+def submit_day(day_num, prompt_type="daily"):
+    prompt_file = f"prompts/{prompt_type}/day_{day_num:02d}.txt"
     full_path = os.path.join(REPO_ROOT, prompt_file)
     if not os.path.exists(full_path):
-        print(f"❌ Day {day_num} prompt not found at {prompt_file}")
+        print(f"❌ Day {day_num} ({prompt_type}) prompt not found at {prompt_file}")
         sys.exit(1)
         
     with open(full_path) as f:
         prompt_content = f.read()
 
     full_prompt = SAFETY_RULES + "\n\n---\n\n" + prompt_content
-    submit_prompt(full_prompt, task_name=f"Day {day_num}")
+    submit_prompt(full_prompt, task_name=f"Day {day_num} ({prompt_type})")
 
 def submit_file(filepath):
     if not os.path.exists(filepath):
@@ -132,6 +133,12 @@ def main():
         print(__doc__)
         sys.exit(0)
 
+    prompt_type = "daily"
+    if "--type" in args:
+        idx = args.index("--type")
+        if idx + 1 < len(args):
+            prompt_type = args[idx + 1]
+
     if "--file" in args:
         idx = args.index("--file")
         if idx + 1 >= len(args):
@@ -145,7 +152,7 @@ def main():
         if idx + 1 >= len(args):
             print("❌ Please specify a day number after --day.")
             sys.exit(1)
-        submit_day(int(args[idx + 1]))
+        submit_day(int(args[idx + 1]), prompt_type)
         sys.exit(0)
 
     if "--week" in args:
@@ -156,9 +163,9 @@ def main():
         week_num = int(args[idx + 1])
         start_day = (week_num - 1) * 7 + 1
         end_day = min(week_num * 7, 90) # Cap at 90
-        print(f"📅 Submitting prompts for Week {week_num} (Days {start_day} to {end_day})")
+        print(f"📅 Submitting {prompt_type} prompts for Week {week_num} (Days {start_day} to {end_day})")
         for day in range(start_day, end_day + 1):
-            submit_day(day)
+            submit_day(day, prompt_type)
         sys.exit(0)
 
     # Default: print help

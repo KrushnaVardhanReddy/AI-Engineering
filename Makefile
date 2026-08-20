@@ -1,4 +1,4 @@
-.PHONY: help setup jupyter generate generate-cheatsheets submit-week submit-day merge sync
+.PHONY: help setup jupyter generate generate-cheatsheets submit-week submit-day submit-cheatsheet-week submit-cheatsheet-day merge sync
 
 help:
 	@echo "AI Engineering Mastery - Makefile"
@@ -10,6 +10,8 @@ help:
 	@echo "  make generate-cheatsheets- Regenerate all 90 daily cheatsheet prompts"
 	@echo "  make submit-week W=1     - Submit all 7 days of a specific week to Jules"
 	@echo "  make submit-day D=1      - Submit a specific day's prompt to Jules"
+	@echo "  make submit-cheatsheet-week W=1 - Submit week's cheatsheet prompts to Jules"
+	@echo "  make submit-cheatsheet-day D=1  - Submit day's cheatsheet prompt to Jules"
 	@echo "  make merge S=1 E=7       - Merge a batch of PRs (Start to End) from Jules"
 	@echo "  make sync                - Pull latest changes from origin main"
 
@@ -33,6 +35,14 @@ submit-week:
 submit-day:
 	@if [ -z "$(D)" ]; then echo "❌ Error: Day number (D) is required. Usage: make submit-day D=1"; exit 1; fi
 	.venv/bin/python3 scripts/jules_submit.py --day $(D)
+
+submit-cheatsheet-week:
+	@if [ -z "$(W)" ]; then echo "❌ Error: Week number (W) is required. Usage: make submit-cheatsheet-week W=1"; exit 1; fi
+	.venv/bin/python3 scripts/jules_submit.py --type cheatsheets --week $(W)
+
+submit-cheatsheet-day:
+	@if [ -z "$(D)" ]; then echo "❌ Error: Day number (D) is required. Usage: make submit-cheatsheet-day D=1"; exit 1; fi
+	.venv/bin/python3 scripts/jules_submit.py --type cheatsheets --day $(D)
 
 merge:
 	@if [ -z "$(S)" ] || [ -z "$(E)" ]; then echo "❌ Error: Start (S) and End (E) are required. Usage: make merge S=1 E=7"; exit 1; fi
