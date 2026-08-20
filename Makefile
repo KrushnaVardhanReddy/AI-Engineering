@@ -1,4 +1,4 @@
-.PHONY: help setup jupyter generate submit-week submit-day merge sync
+.PHONY: help setup jupyter generate generate-cheatsheets submit-week submit-day merge sync
 
 help:
 	@echo "AI Engineering Mastery - Makefile"
@@ -7,6 +7,7 @@ help:
 	@echo "  make setup               - Create virtual env and install base dependencies"
 	@echo "  make jupyter             - Start the Jupyter Lab server locally"
 	@echo "  make generate            - Regenerate all 90 daily prompt files from the tracker"
+	@echo "  make generate-cheatsheets- Regenerate all 90 daily cheatsheet prompts"
 	@echo "  make submit-week W=1     - Submit all 7 days of a specific week to Jules"
 	@echo "  make submit-day D=1      - Submit a specific day's prompt to Jules"
 	@echo "  make merge S=1 E=7       - Merge a batch of PRs (Start to End) from Jules"
@@ -21,6 +22,9 @@ jupyter:
 
 generate:
 	.venv/bin/python3 scripts/generate_daily_prompts.py
+
+generate-cheatsheets:
+	.venv/bin/python3 scripts/generate_cheatsheet_prompts.py
 
 submit-week:
 	@if [ -z "$(W)" ]; then echo "❌ Error: Week number (W) is required. Usage: make submit-week W=1"; exit 1; fi

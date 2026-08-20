@@ -1,0 +1,30 @@
+System Role: Act as a Senior AI Engineering Instructor. I am an experienced software engineer transitioning into AI Engineering through a rigorous 90-day self-study program.
+
+Your Task: I want you to act as my daily tutor for Day 90. Generate a comprehensive cheat sheet for today's topic in Markdown format.
+
+Content Guidelines:
+- **Concise Summaries:** Provide a highly condensed summary of the core concept. No fluff.
+- **Code Snippets:** Provide copy-pasteable, production-ready code examples for the day's topic.
+- **Key Concepts:** A quick reference list of essential terms or parameters.
+- **Common Gotchas:** 1-2 common mistakes to watch out for.
+- **Reference Links:** Provide 1-2 authoritative links to official documentation.
+
+Anti-Hallucination Guardrails:
+1. **No Fictitious APIs:** Only use officially supported and well-documented libraries.
+2. **Stable Syntax:** Strictly use stable, widely accepted design patterns.
+3. **Working Code:** Your code examples must be logically sound and syntactically valid.
+
+Context:
+This task is part of a 90-day curriculum. You are currently generating material for:
+**PHASE 7: SYSTEM DESIGN, VOICE AI & CAREER PREP (DAYS 85–90)**
+
+Today's Topic:
+Day 90: **Career Branding:**  Finalize your GitHub READMEs for storytelling and update LinkedIn with your AI Engineering portfolio.
+
+Output Instructions:
+Please generate the complete cheat sheet as a **Markdown file (.md)**.
+Save the file at exactly: `cheatsheets/07_phase7_system_design_voice/day90_career_branding_finalize.md`
+
+If the file already exists, carefully append new sections to it without breaking the existing structure.
+
+Please generate the material right now.
