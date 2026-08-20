@@ -58,3 +58,68 @@ append_to_jsonl("dataset.jsonl", data)
 ## Reference Links
 - [Python `json` library documentation](https://docs.python.org/3/library/json.html)
 - [JSON Lines Specification](https://jsonlines.org/)
+
+### Secure OOP JSONL Processor
+An object-oriented approach for processing JSONL files, incorporating AI security best practices such as PII redaction and error fallbacks.
+
+```python
+import json
+import re
+from typing import Iterator, Dict, Any
+
+class SecureJSONLProcessor:
+    """Processes JSONL data securely with PII redaction and error handling."""
+
+    def __init__(self, filepath: str):
+        self.filepath = filepath
+        # Simple regex for matching common email patterns to demonstrate PII redaction
+        self.email_pattern = re.compile(r'[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}')
+
+    def _redact_pii(self, text: str) -> str:
+        """Redacts PII (like emails) from the provided text."""
+        if not text:
+            return text
+        return self.email_pattern.sub("[REDACTED_EMAIL]", text)
+
+    def stream_secure(self) -> Iterator[Dict[str, Any]]:
+        """Safely streams JSONL records with redaction and fallback handling."""
+        try:
+            with open(self.filepath, 'r', encoding='utf-8') as f:
+                for line in f:
+                    line = line.strip()
+                    if not line:
+                        continue
+
+                    try:
+                        record = json.loads(line)
+                        # Sanitize sensitive fields if they exist
+                        if 'prompt' in record and isinstance(record['prompt'], str):
+                            record['prompt'] = self._redact_pii(record['prompt'])
+                        yield record
+                    except json.JSONDecodeError as e:
+                        # Fallback mechanism: log error and skip invalid record
+                        print(f"Warning: Failed to decode line - {e}")
+                        continue
+        except FileNotFoundError:
+            print(f"Error: Dataset file not found at {self.filepath}")
+
+# Example usage
+if __name__ == "__main__":
+    # Create dummy file for example
+    with open("secure_test.jsonl", "w", encoding="utf-8") as f:
+        f.write('{"prompt": "Contact me at user@example.com", "completion": "Sure!"}\n')
+        f.write('{"prompt": "Invalid JSON line" \n')
+
+    processor = SecureJSONLProcessor("secure_test.jsonl")
+    for safe_record in processor.stream_secure():
+        print(f"Processed: {safe_record}")
+```
+
+## Additional Key Concepts
+- **PII Protection:** Redacting Personally Identifiable Information (PII) like emails or SSNs before feeding data into LLMs to prevent privacy leaks.
+- **Fallback Mechanisms:** Implementing robust error handling (e.g., catching `JSONDecodeError`) to ensure one corrupted line doesn't halt the entire data pipeline.
+- **OOP Design:** Encapsulating state (like compiled regex patterns for redaction) and behaviors within classes for cleaner, more maintainable code.
+
+## Additional Common Gotchas
+- **Leaking PII into AI Models:** Failing to sanitize data before sending it to public LLM APIs, violating compliance and privacy rules. Always sanitize at the file processing layer.
+- **Brittle Parsing Logic:** Not wrapping JSON decoding in `try/except` blocks, causing large bulk processing jobs to crash completely over a single malformed line.
