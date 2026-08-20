@@ -99,3 +99,68 @@ if __name__ == "__main__":
 ## Reference Links
 - [Python `urllib.request` Documentation](https://docs.python.org/3/library/urllib.request.html)
 - [Python `logging` HOWTO](https://docs.python.org/3/howto/logging.html)
+
+## Advanced Concepts: State Management & AI Security
+To build production-ready agentic systems, wrappers must also handle conversation state, protect sensitive data (PII), and provide reliable fallbacks when all retries fail.
+
+## Advanced Code Snippets
+
+```python
+import json
+import logging
+import re
+from typing import List, Dict
+
+logger = logging.getLogger(__name__)
+
+class SecureConversationalLLM:
+    """
+    Advanced wrapper demonstrating State Management, PII scrubbing, and Fallback mechanisms.
+    Builds upon the LLMClientWrapper to maintain robust network handling.
+    """
+    def __init__(self, client_wrapper: LLMClientWrapper, fallback_message: str = "Service temporarily unavailable. Please try again later."):
+        self.client = client_wrapper
+        self.fallback_message = fallback_message
+        self.history: List[Dict[str, str]] = []
+
+    def _scrub_pii(self, text: str) -> str:
+        """
+        Replaces simple email patterns to protect PII before sending to the LLM.
+        """
+        return re.sub(r"[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+", "[REDACTED_EMAIL]", text)
+
+    def chat(self, user_input: str) -> str:
+        """
+        Manages conversation state, scrubs PII, and utilizes fallbacks if the API is unreachable.
+        """
+        safe_input = self._scrub_pii(user_input)
+        self.history.append({"role": "user", "content": safe_input})
+
+        # Construct a simple unified prompt from history for the base client
+        prompt = "\n".join([f"{msg['role']}: {msg['content']}" for msg in self.history])
+
+        response = self.client.generate_text(prompt)
+
+        if response is None:
+            logger.warning("LLM call failed after all retries. Returning fallback message.")
+            return self.fallback_message
+
+        self.history.append({"role": "assistant", "content": response})
+        return response
+
+# --- Advanced Example Usage ---
+if __name__ == "__main__":
+    print("\nRunning SecureConversationalLLM test...")
+    # client is already defined in the previous snippet
+    secure_bot = SecureConversationalLLM(client_wrapper=client)
+
+    # Test PII scrubbing and fallback (since dummy key fails)
+    safe_response = secure_bot.chat("My email is test@example.com. Explain quantum computing.")
+    print(f"Chat Response: {safe_response}")
+    print(f"Current History: {json.dumps(secure_bot.history, indent=2)}")
+```
+
+## Additional Key Concepts
+- **State Management:** Storing the sequence of interactions (e.g., `self.history`) so the LLM has contextual awareness of the conversation.
+- **PII Protection:** The practice of intercepting and masking Personally Identifiable Information (like emails or SSNs) at the application layer to avoid leaking sensitive data to external models.
+- **Fallback Mechanisms:** Returning a predefined, safe response when the primary service is entirely unreachable, ensuring a degraded but stable user experience.
