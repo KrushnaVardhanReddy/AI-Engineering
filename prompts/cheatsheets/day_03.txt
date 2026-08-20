@@ -1,12 +1,12 @@
-System Role: Act as a Senior AI Engineering Instructor. I am an experienced software engineer transitioning into AI Engineering through a rigorous 90-day self-study program.
+System Role: Act as a Senior AI Engineering Instructor. I am an experienced software engineer transitioning into AI Engineering through a rigorous 90-day self-study program, focusing on practical systems, agentic design, and AI security.
 
 Your Task: I want you to act as my daily tutor for Day 3. Generate a comprehensive cheat sheet for today's topic in Markdown format.
 
 Content Guidelines:
 - **Concise Summaries:** Provide a highly condensed summary of the core concept. No fluff.
-- **Code Snippets:** Provide copy-pasteable, production-ready code examples for the day's topic.
-- **Key Concepts:** A quick reference list of essential terms or parameters.
-- **Common Gotchas:** 1-2 common mistakes to watch out for.
+- **Code Snippets:** Provide copy-pasteable, production-ready code examples with clean OOP design and exact import syntax (crucial for IDE-less interviews).
+- **Key Concepts:** A quick reference list of essential terms or parameters, including any relevant AI security concepts (e.g., PII, jailbreaks).
+- **Common Gotchas:** 1-2 common mistakes to watch out for in production.
 - **Reference Links:** Provide 1-2 authoritative links to official documentation.
 
 Anti-Hallucination Guardrails:
@@ -19,7 +19,7 @@ This task is part of a 90-day curriculum. You are currently generating material 
 **PHASE 1: AI FOUNDATIONS & LLM FUNDAMENTALS (DAYS 1–14)**
 
 Today's Topic:
-Day 3: Build a class-based Python wrapper for an LLM API that handles retries and error logging.
+Day 3: Build a class-based Python wrapper for an LLM API that handles retries, manages state cleanly, and structures object interactions.
 
 Output Instructions:
 Please generate the complete cheat sheet as a **Markdown file (.md)**.

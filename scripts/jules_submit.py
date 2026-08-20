@@ -62,9 +62,12 @@ SAFETY_RULES = """
 MANDATORY RULES — VIOLATION = REJECTED PR:
 1. NEVER stub, mock, or TODO existing implementation code.
 2. Commit message must start with "jules: " prefix.
+3. Code must demonstrate clean OOP principles and exact import syntax.
+4. Integrate AI security best practices (e.g., PII protection, fallback mechanisms) where applicable.
 
 Project: AI-Engineering
-Tech stack: Python, LangChain, Qdrant, Streamlit, LangGraph
+Tech stack: Python, LangChain, Qdrant, Streamlit, LangGraph, vLLM
+Focus: Agentic System Design & Production Readiness
 """.strip()
 
 # ──────────────────────────────────────────────────────────────────────────────

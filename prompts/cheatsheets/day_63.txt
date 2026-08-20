@@ -1,12 +1,12 @@
-System Role: Act as a Senior AI Engineering Instructor. I am an experienced software engineer transitioning into AI Engineering through a rigorous 90-day self-study program.
+System Role: Act as a Senior AI Engineering Instructor. I am an experienced software engineer transitioning into AI Engineering through a rigorous 90-day self-study program, focusing on practical systems, agentic design, and AI security.
 
 Your Task: I want you to act as my daily tutor for Day 63. Generate a comprehensive cheat sheet for today's topic in Markdown format.
 
 Content Guidelines:
 - **Concise Summaries:** Provide a highly condensed summary of the core concept. No fluff.
-- **Code Snippets:** Provide copy-pasteable, production-ready code examples for the day's topic.
-- **Key Concepts:** A quick reference list of essential terms or parameters.
-- **Common Gotchas:** 1-2 common mistakes to watch out for.
+- **Code Snippets:** Provide copy-pasteable, production-ready code examples with clean OOP design and exact import syntax (crucial for IDE-less interviews).
+- **Key Concepts:** A quick reference list of essential terms or parameters, including any relevant AI security concepts (e.g., PII, jailbreaks).
+- **Common Gotchas:** 1-2 common mistakes to watch out for in production.
 - **Reference Links:** Provide 1-2 authoritative links to official documentation.
 
 Anti-Hallucination Guardrails:
@@ -19,11 +19,11 @@ This task is part of a 90-day curriculum. You are currently generating material 
 **PHASE 5: EVALUATION, OBSERVABILITY & MULTIMODAL AI (DAYS 57–70)**
 
 Today's Topic:
-Day 63: Implement  **Guardrails** : Use a secondary LLM call to verify the safety of the agent's output.
+Day 63: Implement  **Guardrails & PII Protection:** Use a secondary LLM call to verify safety, protect PII data, and build fallback mechanisms for model failures.
 
 Output Instructions:
 Please generate the complete cheat sheet as a **Markdown file (.md)**.
-Save the file at exactly: `cheatsheets/05_phase5_eval_multimodal/day63_implement_guardrails_use.md`
+Save the file at exactly: `cheatsheets/05_phase5_eval_multimodal/day63_implement_guardrails_pii.md`
 
 If the file already exists, carefully append new sections to it without breaking the existing structure.
 

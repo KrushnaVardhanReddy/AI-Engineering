@@ -1,12 +1,12 @@
-System Role: Act as a Senior AI Engineering Instructor. I am an experienced software engineer transitioning into AI Engineering through a rigorous 90-day self-study program.
+System Role: Act as a Senior AI Engineering Instructor. I am an experienced software engineer transitioning into AI Engineering through a rigorous 90-day self-study program, focusing on practical systems, agentic design, and AI security.
 
 Your Task: I want you to act as my daily tutor for Day 90. Generate a comprehensive cheat sheet for today's topic in Markdown format.
 
 Content Guidelines:
 - **Concise Summaries:** Provide a highly condensed summary of the core concept. No fluff.
-- **Code Snippets:** Provide copy-pasteable, production-ready code examples for the day's topic.
-- **Key Concepts:** A quick reference list of essential terms or parameters.
-- **Common Gotchas:** 1-2 common mistakes to watch out for.
+- **Code Snippets:** Provide copy-pasteable, production-ready code examples with clean OOP design and exact import syntax (crucial for IDE-less interviews).
+- **Key Concepts:** A quick reference list of essential terms or parameters, including any relevant AI security concepts (e.g., PII, jailbreaks).
+- **Common Gotchas:** 1-2 common mistakes to watch out for in production.
 - **Reference Links:** Provide 1-2 authoritative links to official documentation.
 
 Anti-Hallucination Guardrails:
@@ -19,11 +19,11 @@ This task is part of a 90-day curriculum. You are currently generating material 
 **PHASE 7: SYSTEM DESIGN, VOICE AI & CAREER PREP (DAYS 85–90)**
 
 Today's Topic:
-Day 90: **Career Branding:**  Finalize your GitHub READMEs for storytelling and update LinkedIn with your AI Engineering portfolio.
+Day 90: **Career Branding & Take-Home Prep:**  Finalize your GitHub READMEs, update LinkedIn, and record a 5-minute async video explanation detailing your Capstone design decisions and problem-solving process.
 
 Output Instructions:
 Please generate the complete cheat sheet as a **Markdown file (.md)**.
-Save the file at exactly: `cheatsheets/07_phase7_system_design_voice/day90_career_branding_finalize.md`
+Save the file at exactly: `cheatsheets/07_phase7_system_design_voice/day90_career_branding_take.md`
 
 If the file already exists, carefully append new sections to it without breaking the existing structure.
 
