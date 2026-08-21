@@ -35,7 +35,7 @@ st.title("Simple LLM Chatbot")
 
 # Initialize LLM (requires GROQ_API_KEY in Streamlit Secrets)
 try:
-    llm = ChatGroq(model="llama3-8b-8192")
+    llm = ChatGroq(model="groq/compound")
 except Exception as e:
     logger.error(f"Failed to initialize LLM: {e}")
     st.error("Error initializing LLM.")
