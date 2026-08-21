@@ -76,3 +76,114 @@ if __name__ == "__main__":
 ## Reference Links
 - [OpenAI API Reference - Chat Completions (Parameters)](https://platform.openai.com/docs/api-reference/chat/create)
 - [LangChain ChatOpenAI Documentation](https://python.langchain.com/v0.1/docs/integrations/chat/openai/)
+
+## Advanced Implementation: OOP & Security Best Practices
+This section demonstrates how to wrap parameter benchmarking in a robust class structure. This ensures proper separation of concerns, secure configuration loading (e.g., handling missing API keys without exposing secrets), and comprehensive error handling during batch processing.
+
+```python
+import os
+import logging
+import warnings
+from typing import List, Dict, Any, Optional
+from langchain_openai import ChatOpenAI
+from langchain_core.messages import HumanMessage
+from pydantic import BaseModel, Field
+
+# Setup basic logging
+logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
+logger = logging.getLogger(__name__)
+
+# Suppress the ChatOpenAI deprecation warning about passing parameters via model_kwargs
+warnings.filterwarnings("ignore", category=UserWarning, module="langchain_openai.chat_models.base")
+
+class BenchmarkConfig(BaseModel):
+    """Pydantic model for benchmark configuration parameters."""
+    temperature: float = Field(default=0.7, ge=0.0, le=2.0)
+    top_p: float = Field(default=1.0, ge=0.0, le=1.0)
+    frequency_penalty: float = Field(default=0.0, ge=-2.0, le=2.0)
+
+class ParameterBenchmarker:
+    """Class to manage and execute LLM parameter benchmarks."""
+
+    def __init__(self, model_name: str = "gpt-3.5-turbo"):
+        self.model_name = model_name
+        self._ensure_api_key()
+
+    def _ensure_api_key(self) -> None:
+        """Securely check for the API key without exposing it."""
+        if not os.environ.get("OPENAI_API_KEY"):
+            logger.warning("OPENAI_API_KEY environment variable not found. Using dummy key for testing.")
+            os.environ["OPENAI_API_KEY"] = "sk-dummy"
+
+    def run_benchmark(self, prompt: str, configs: List[BenchmarkConfig], iterations_per_config: int = 10) -> List[Dict[str, Any]]:
+        """Run the provided prompt against multiple parameter configurations, multiple times to observe variance."""
+        results = []
+        logger.info(f"Starting benchmark for prompt: '{prompt}' with {len(configs)} configurations, {iterations_per_config} iterations each.")
+
+        for config_idx, config in enumerate(configs, 1):
+            logger.info(f"--- Testing Configuration {config_idx}/{len(configs)} ---")
+            logger.info(f"Config: {config.model_dump_json()}")
+
+            try:
+                # Initialize LLM with the specific configuration
+                llm = ChatOpenAI(
+                    model=self.model_name,
+                    temperature=config.temperature,
+                    top_p=config.top_p,
+                    frequency_penalty=config.frequency_penalty,
+                    max_retries=0 # Fail fast for benchmarking
+                )
+
+                for iter_num in range(1, iterations_per_config + 1):
+                    try:
+                        logger.info(f"  -> Running iteration {iter_num}/{iterations_per_config}")
+                        # Execute the prompt
+                        response = llm.invoke([HumanMessage(content=prompt)])
+                        result_text = response.content.strip()
+
+                        results.append({
+                            "config_id": config_idx,
+                            "iteration": iter_num,
+                            "config": config.model_dump(),
+                            "response": result_text,
+                            "status": "success"
+                        })
+                    except Exception as loop_e:
+                         error_msg = f"  -> API Call Failed on iteration {iter_num}: {type(loop_e).__name__} - {str(loop_e)}"
+                         logger.error(error_msg)
+                         results.append({
+                            "config_id": config_idx,
+                            "iteration": iter_num,
+                            "config": config.model_dump(),
+                            "response": None,
+                            "status": "failed",
+                            "error": type(loop_e).__name__
+                        })
+
+            except Exception as e:
+                # Graceful fallback mechanisms - critical for production reliability
+                error_msg = f"Failed to initialize LLM or fatal error: {type(e).__name__} - {str(e)}"
+                logger.error(error_msg)
+
+        return results
+
+if __name__ == "__main__":
+    # Define a set of robust configurations to test variance
+    test_configs = [
+        BenchmarkConfig(temperature=0.2, top_p=1.0, frequency_penalty=0.0), # Low randomness
+        BenchmarkConfig(temperature=0.8, top_p=1.0, frequency_penalty=0.0), # Standard randomness
+        BenchmarkConfig(temperature=0.8, top_p=0.5, frequency_penalty=0.0), # Standard randomness + nucleus sampling
+        BenchmarkConfig(temperature=1.5, top_p=1.0, frequency_penalty=1.0), # High randomness + repetition penalty
+    ]
+
+    benchmarker = ParameterBenchmarker()
+    test_prompt = "Explain quantum computing in one simple sentence."
+
+    # Execute the benchmarking process with 10 iterations per config to observe variance
+    benchmark_results = benchmarker.run_benchmark(prompt=test_prompt, configs=test_configs, iterations_per_config=10)
+
+    # Summary of results
+    print("\n--- Benchmark Execution Summary ---")
+    for res in benchmark_results:
+        print(f"Config {res['config_id']}, Iteration {res['iteration']} ({res['status']}): Temp={res['config']['temperature']}, Top-P={res['config']['top_p']}, Freq Penalty={res['config']['frequency_penalty']}")
+```
