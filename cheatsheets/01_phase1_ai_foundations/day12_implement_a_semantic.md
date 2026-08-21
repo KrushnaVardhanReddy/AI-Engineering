@@ -84,3 +84,142 @@ except Exception as e:
 ### 5. Reference Links
 - [Qdrant Python Client Documentation](https://qdrant.tech/documentation/interfaces/python/)
 - [LangChain OpenAI Embeddings](https://python.langchain.com/docs/integrations/text_embedding/openai/)
+
+### 6. Production-Ready OOP Implementation
+
+```python
+import os
+import logging
+import re
+from typing import List, Dict, Any
+
+from pydantic import BaseModel, Field, SecretStr
+from qdrant_client import QdrantClient
+from qdrant_client.models import Distance, VectorParams, PointStruct
+from langchain_openai import OpenAIEmbeddings
+
+# Configure logging
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
+
+class Document(BaseModel):
+    id: int
+    text: str
+    metadata: Dict[str, Any] = Field(default_factory=dict)
+
+class SemanticSearcher:
+    """
+    A production-ready Semantic Searcher demonstrating clean OOP design and AI security.
+    """
+    def __init__(self, collection_name: str, embedding_model_name: str = "text-embedding-3-small"):
+        self.collection_name = collection_name
+
+        # Security: Fetch API key securely and avoid hardcoded fallbacks in production logic
+        api_key_str = os.environ.get("OPENAI_API_KEY")
+        if not api_key_str:
+            raise ValueError("OPENAI_API_KEY environment variable is not set. It is required for production.")
+
+        self._api_key = SecretStr(api_key_str)
+
+        try:
+            self.embeddings_model = OpenAIEmbeddings(
+                model=embedding_model_name,
+                api_key=self._api_key
+            )
+        except Exception as e:
+            logger.error(f"Failed to initialize embeddings model: {e}")
+            raise
+
+        # Initialize Qdrant Client (In-memory for testing, use URL/API key in production)
+        self.client = QdrantClient(":memory:")
+        self._initialize_collection()
+
+    def _initialize_collection(self) -> None:
+        """Initializes the Qdrant collection if it doesn't exist."""
+        # For text-embedding-3-small, the dimension is 1536
+        dimension = 1536
+        try:
+            self.client.create_collection(
+                collection_name=self.collection_name,
+                vectors_config=VectorParams(size=dimension, distance=Distance.COSINE),
+            )
+            logger.info(f"Collection '{self.collection_name}' initialized.")
+        except Exception as e:
+            logger.error(f"Error creating collection: {e}")
+            raise
+
+    def _sanitize_pii(self, text: str) -> str:
+        """Sanitizes PII from text before embedding. Redacts email addresses."""
+        email_pattern = r'[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}'
+        return re.sub(email_pattern, "[REDACTED_EMAIL]", text)
+
+    def index_documents(self, documents: List[Document]) -> None:
+        """Embeds and indexes a list of documents."""
+        if not documents:
+            logger.warning("No documents provided to index.")
+            return
+
+        # Security: Sanitize PII here before embedding
+        texts = [self._sanitize_pii(doc.text) for doc in documents]
+
+        try:
+            vectors = self.embeddings_model.embed_documents(texts)
+            points = [
+                PointStruct(id=doc.id, vector=vectors[i], payload={"text": texts[i], **doc.metadata})
+                for i, doc in enumerate(documents)
+            ]
+            self.client.upsert(
+                collection_name=self.collection_name,
+                points=points
+            )
+            logger.info(f"Successfully indexed {len(documents)} documents.")
+        except Exception as e:
+            logger.error(f"Failed to index documents: {e}")
+
+    def search(self, query: str, limit: int = 1) -> List[Dict[str, Any]]:
+        """Searches for the most relevant documents based on semantic similarity."""
+        try:
+            query_vector = self.embeddings_model.embed_query(query)
+            search_result = self.client.query_points(
+                collection_name=self.collection_name,
+                query=query_vector,
+                limit=limit
+            )
+
+            results = []
+            if search_result.points:
+                for point in search_result.points:
+                    results.append({
+                        "score": point.score,
+                        "text": point.payload.get("text", ""),
+                        "metadata": {k: v for k, v in point.payload.items() if k != "text"}
+                    })
+            return results
+        except Exception as e:
+            logger.error(f"Search failed: {e}")
+            # Graceful fallback: return empty list on failure
+            return []
+
+if __name__ == "__main__":
+    # Example Usage
+    searcher = SemanticSearcher(collection_name="knowledge_base")
+
+    docs = [
+        Document(id=1, text="The quick brown fox jumps over the lazy dog."),
+        Document(id=2, text="Python is a popular programming language for AI."),
+        Document(id=3, text="Qdrant is an open-source vector database."),
+        Document(id=4, text="Contact us at secret@example.com for more info.") # Contains PII
+    ]
+
+    searcher.index_documents(docs)
+
+    query_str = "What is a good language for machine learning?"
+    print(f"\nQuery: {query_str}")
+
+    results = searcher.search(query=query_str, limit=1)
+    if results:
+        for res in results:
+            print(f"Top Match: {res['text']} (Score: {res['score']:.4f})")
+    else:
+        print("No matches found.")
+```
