@@ -73,3 +73,95 @@ print(f"Score: {pairs[0]['score']:.4f}")
 ## Reference Links
 - [Sentence-Transformers Official Documentation](https://sbert.net/)
 - [HuggingFace - Sentence Transformers](https://huggingface.co/sentence-transformers)
+
+## Production-Ready Implementation (OOP & Security)
+
+```python
+import logging
+from typing import List, Dict, Optional
+from sentence_transformers import SentenceTransformer, util
+from pydantic import BaseModel, ValidationError
+
+# Configure logging
+logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
+logger = logging.getLogger(__name__)
+
+class SentenceConfig(BaseModel):
+    """Configuration for the embedding model."""
+    model_name: str = "all-MiniLM-L6-v2"
+    batch_size: int = 32
+
+class TextEmbedder:
+    """A production-ready class for generating text embeddings and computing similarities."""
+
+    def __init__(self, config: Optional[SentenceConfig] = None):
+        """Initializes the TextEmbedder with the specified configuration."""
+        self.config = config or SentenceConfig()
+        try:
+            logger.info(f"Loading embedding model: {self.config.model_name}")
+            self.model = SentenceTransformer(self.config.model_name)
+        except Exception as e:
+            logger.error(f"Failed to load embedding model: {e}")
+            raise RuntimeError(f"Initialization failed: {e}")
+
+    def generate_embeddings(self, texts: List[str]):
+        """Generates embeddings for a list of texts with PII consideration."""
+        if not texts:
+            logger.warning("Empty text list provided for embeddings.")
+            return []
+
+        # In a real production system, consider scrubbing PII before generating embeddings
+        # texts = [scrub_pii(text) for text in texts]
+
+        try:
+            logger.info(f"Generating embeddings for {len(texts)} texts...")
+            embeddings = self.model.encode(texts, batch_size=self.config.batch_size, show_progress_bar=False)
+            return embeddings
+        except Exception as e:
+            logger.error(f"Error during embedding generation: {e}")
+            raise RuntimeError(f"Embedding generation failed: {e}")
+
+    def compute_similarity(self, texts: List[str]) -> List[Dict]:
+        """Computes cosine similarity between all pairs of provided texts."""
+        if len(texts) < 2:
+            logger.warning("At least two texts are required to compute similarity.")
+            return []
+
+        embeddings = self.generate_embeddings(texts)
+
+        try:
+            cosine_scores = util.cos_sim(embeddings, embeddings)
+            pairs = []
+            # Calculate for upper triangle to avoid duplicates and self-comparison
+            for i in range(len(cosine_scores) - 1):
+                for j in range(i + 1, len(cosine_scores)):
+                    pairs.append({
+                        "text_1": texts[i],
+                        "text_2": texts[j],
+                        "similarity_score": float(cosine_scores[i][j])
+                    })
+
+            # Sort by highest similarity
+            pairs.sort(key=lambda x: x["similarity_score"], reverse=True)
+            return pairs
+        except Exception as e:
+            logger.error(f"Error computing cosine similarity: {e}")
+            return []
+
+if __name__ == "__main__":
+    # Example Usage
+    embedder = TextEmbedder()
+
+    sample_texts = [
+        "The cat sits outside",
+        "A man is playing guitar",
+        "The feline is resting outdoors"
+    ]
+
+    try:
+        similar_pairs = embedder.compute_similarity(sample_texts)
+        for pair in similar_pairs:
+            print(f"Similarity: {pair['similarity_score']:.4f} | '{pair['text_1']}' vs '{pair['text_2']}'")
+    except Exception as e:
+         logger.error(f"Execution failed: {e}")
+```
