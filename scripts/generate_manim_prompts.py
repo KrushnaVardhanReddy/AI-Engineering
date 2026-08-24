@@ -3,9 +3,7 @@ import os
 PROMPTS_DIR = "/home/krushna/Project/AI-Engineering/prompts/manim"
 
 # Default template for all standard topics
-TEMPLATE = """<PASTE MANDATORY RULES BLOCK>
-
-You are tasked with generating a Manim animation script for our AI/ML interview prep series.
+TEMPLATE = """You are tasked with generating a Manim animation script for our AI/ML interview prep series.
 
 ### Setup & Requirements
 - **Framework:** Manim Community Edition (`manim` package on PyPI, version >= 0.18.0). Do NOT use the legacy `manimlib` (3b1b) version.
@@ -64,9 +62,7 @@ Commit: "jules: add manim animation for day {day_num} - {topic}"
 """
 
 # Special deep-dive template for Transformer data-flow topics
-TRANSFORMER_TEMPLATE = """<PASTE MANDATORY RULES BLOCK>
-
-You are tasked with generating a Manim animation script for our AI/ML interview prep series.
+TRANSFORMER_TEMPLATE = """You are tasked with generating a Manim animation script for our AI/ML interview prep series.
 
 ### Setup & Requirements
 - **Framework:** Manim Community Edition (`manim` package on PyPI, version >= 0.18.0). Do NOT use the legacy `manimlib` (3b1b) version.

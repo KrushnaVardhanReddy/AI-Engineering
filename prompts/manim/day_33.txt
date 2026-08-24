@@ -1,5 +1,3 @@
-<PASTE MANDATORY RULES BLOCK>
-
 You are tasked with generating a Manim animation script for our AI/ML interview prep series.
 
 ### Setup & Requirements
