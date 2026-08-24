@@ -16,4 +16,5 @@ dev-dist/
 build/
 ios/
 android/
-.venv/
+.venv/media/
+__pycache__/
