@@ -1,3 +1,6 @@
-# Markdown Document
+# Markdown File
 
-This is a *markdown* file with structured text.
+This is a dummy markdown file.
+
+## Section 1
+Content here.
