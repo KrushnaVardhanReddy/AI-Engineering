@@ -9,7 +9,7 @@ You are tasked with generating a Manim animation script for our AI/ML interview 
 - **Output Location:** Create the script inside the `animations/` directory.
 
 ### The Task: Day 26
-Today's Topic: **Introduction to Neural Networks**
+Today's Topic: **K-Means Clustering**
 
 Write a Python script using the Manim Community API. The animation must:
 
@@ -45,6 +45,6 @@ Write a Python script using the Manim Community API. The animation must:
    - The scene must be fully self-contained with no external assets.
    - Smooth transitions only: `FadeIn`, `FadeOut`, `Write`, `Transform`, `MoveToTarget`.
 
-6. Name the file: `animations/day_26_introduction_to_neural_networks.py`
+6. Name the file: `animations/day_26_k_means_clustering.py`
 
-Commit: "jules: add manim animation for day 26 - Introduction to Neural Networks"
+Commit: "jules: add manim animation for day 26 - K-Means Clustering"

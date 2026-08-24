@@ -9,7 +9,7 @@ You are tasked with generating a Manim animation script for our AI/ML interview 
 - **Output Location:** Create the script inside the `animations/` directory.
 
 ### The Task: Day 27
-Today's Topic: **Activation Functions (ReLU, Sigmoid, Tanh)**
+Today's Topic: **Precision, Recall, and F1 Score**
 
 Write a Python script using the Manim Community API. The animation must:
 
@@ -45,6 +45,6 @@ Write a Python script using the Manim Community API. The animation must:
    - The scene must be fully self-contained with no external assets.
    - Smooth transitions only: `FadeIn`, `FadeOut`, `Write`, `Transform`, `MoveToTarget`.
 
-6. Name the file: `animations/day_27_activation_functions_relu_sigmoid_tanh.py`
+6. Name the file: `animations/day_27_precision_recall_and_f1_score.py`
 
-Commit: "jules: add manim animation for day 27 - Activation Functions (ReLU, Sigmoid, Tanh)"
+Commit: "jules: add manim animation for day 27 - Precision, Recall, and F1 Score"

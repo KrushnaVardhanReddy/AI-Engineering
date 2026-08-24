@@ -9,7 +9,7 @@ You are tasked with generating a Manim animation script for our AI/ML interview 
 - **Output Location:** Create the script inside the `animations/` directory.
 
 ### The Task: Day 11
-Today's Topic: **Chunking Strategies for RAG**
+Today's Topic: **Embedding Models and Dimensionality**
 
 Write a Python script using the Manim Community API. The animation must:
 
@@ -45,6 +45,6 @@ Write a Python script using the Manim Community API. The animation must:
    - The scene must be fully self-contained with no external assets.
    - Smooth transitions only: `FadeIn`, `FadeOut`, `Write`, `Transform`, `MoveToTarget`.
 
-6. Name the file: `animations/day_11_chunking_strategies_for_rag.py`
+6. Name the file: `animations/day_11_embedding_models_and_dimensionality.py`
 
-Commit: "jules: add manim animation for day 11 - Chunking Strategies for RAG"
+Commit: "jules: add manim animation for day 11 - Embedding Models and Dimensionality"

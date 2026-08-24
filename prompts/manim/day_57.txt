@@ -8,8 +8,8 @@ You are tasked with generating a Manim animation script for our AI/ML interview 
 - **Python Version:** Python 3.10+
 - **Output Location:** Create the script inside the `animations/` directory.
 
-### The Task: Day 8
-Today's Topic: **Semantic Space Mapping (King - Man + Woman = Queen)**
+### The Task: Day 57
+Today's Topic: **Autoencoder and Latent Space**
 
 Write a Python script using the Manim Community API. The animation must:
 
@@ -45,6 +45,6 @@ Write a Python script using the Manim Community API. The animation must:
    - The scene must be fully self-contained with no external assets.
    - Smooth transitions only: `FadeIn`, `FadeOut`, `Write`, `Transform`, `MoveToTarget`.
 
-6. Name the file: `animations/day_08_semantic_space_mapping_king___man_plus_woman_equals_queen.py`
+6. Name the file: `animations/day_57_autoencoder_and_latent_space.py`
 
-Commit: "jules: add manim animation for day 8 - Semantic Space Mapping (King - Man + Woman = Queen)"
+Commit: "jules: add manim animation for day 57 - Autoencoder and Latent Space"

@@ -9,7 +9,7 @@ You are tasked with generating a Manim animation script for our AI/ML interview 
 - **Output Location:** Create the script inside the `animations/` directory.
 
 ### The Task: Day 23
-Today's Topic: **PCA - Principal Component Analysis**
+Today's Topic: **Random Forests and Bagging**
 
 Write a Python script using the Manim Community API. The animation must:
 
@@ -45,6 +45,6 @@ Write a Python script using the Manim Community API. The animation must:
    - The scene must be fully self-contained with no external assets.
    - Smooth transitions only: `FadeIn`, `FadeOut`, `Write`, `Transform`, `MoveToTarget`.
 
-6. Name the file: `animations/day_23_pca___principal_component_analysis.py`
+6. Name the file: `animations/day_23_random_forests_and_bagging.py`
 
-Commit: "jules: add manim animation for day 23 - PCA - Principal Component Analysis"
+Commit: "jules: add manim animation for day 23 - Random Forests and Bagging"

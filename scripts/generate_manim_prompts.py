@@ -132,57 +132,63 @@ TRANSFORMER_DAYS = {
     "Transformer Training - Forward Pass, Loss, and Backprop",
 }
 
-# 50 micro-topics covering all high-yield AI/ML interview areas
+# 60 micro-topics — sorted from math foundations → classical ML → deep learning → Transformers → LLM/GenAI
 TOPICS = [
-    # ── Vectors & Similarity (Days 1–5) ──────────────────────────────────────
+    # ── Math & Vector Foundations (Days 1–6) ─────────────────────────────────
     "Vector Basics and Coordinates",
     "Dot Product Visualization",
     "Cosine Similarity in 3D",
     "Euclidean Distance vs Cosine Similarity",
     "When to Use Which Distance Metric",
+    "Cross-Entropy Loss - The Math Behind Training",
 
-    # ── Embeddings & Semantic Search (Days 6–10) ─────────────────────────────
+    # ── Embeddings & Semantic Search (Days 7–12) ─────────────────────────────
     "Introduction to Word Embeddings",
     "Semantic Space Mapping (King - Man + Woman = Queen)",
     "Sentence Transformers vs Word2Vec",
     "What is a Vector Database?",
     "Embedding Models and Dimensionality",
-
-    # ── RAG & Retrieval (Days 11–16) ─────────────────────────────────────────
     "Chunking Strategies for RAG",
+
+    # ── Retrieval & Vector Indexing (Days 13–18) ──────────────────────────────
     "K-Nearest Neighbors (KNN)",
     "HNSW Graph Indexing - Layer 0",
     "HNSW Graph Indexing - Multi-Layer Search",
     "Inverted File Index (IVF) and Voronoi Cells",
     "Retrieval-Augmented Generation (RAG) Flow",
+    "Attention Masking - Padding Masks vs Causal Masks",
 
-    # ── Classical ML Foundations (Days 17–22) ────────────────────────────────
+    # ── Classical ML Foundations (Days 19–26) ────────────────────────────────
     "Bias-Variance Tradeoff",
     "Overfitting vs Underfitting",
     "Regularization: L1 (Lasso) vs L2 (Ridge)",
     "Decision Trees and Recursive Splitting",
     "Random Forests and Bagging",
     "Support Vector Machines and the Kernel Trick",
-
-    # ── Dimensionality Reduction & Clustering (Days 23–25) ───────────────────
     "PCA - Principal Component Analysis",
     "K-Means Clustering",
-    "t-SNE for Visualization",
 
-    # ── Core Deep Learning (Days 26–32) ──────────────────────────────────────
+    # ── Evaluation & Metrics (Days 27–29) ────────────────────────────────────
+    "Precision, Recall, and F1 Score",
+    "AUC-ROC Curve Explained",
+    "t-SNE for High-Dimensional Visualization",
+
+    # ── Core Deep Learning (Days 30–38) ──────────────────────────────────────
     "Introduction to Neural Networks",
     "Activation Functions (ReLU, Sigmoid, Tanh)",
     "Vanishing Gradient Problem",
-    "Gradient Descent Landscape",
+    "Gradient Descent - SGD vs Adam vs RMSProp",
+    "Learning Rate Schedulers - Warmup and Cosine Decay",
     "Backpropagation Chain Rule",
-    "Batch Normalization",
+    "Batch Normalization vs Layer Normalization",
     "Dropout Regularization",
+    "CNN Architecture - Conv Layer Forward Pass",
 
-    # ── Sequence Models (Days 33–34) ─────────────────────────────────────────
+    # ── Sequence Models (Days 39–40) ─────────────────────────────────────────
     "RNN Sequential Bottleneck",
     "LSTM and the Gating Mechanism",
 
-    # ── Transformer Deep-Dive: Data Flow (Days 35–45) ─────────────────────────
+    # ── Transformer Deep-Dive: Data Flow (Days 41–51) ─────────────────────────
     "Transformer Architecture Overview - End-to-End Data Flow",
     "Tokenization and Input Embedding - How Text Becomes Numbers",
     "Positional Encoding - Injecting Order into Embeddings",
@@ -195,12 +201,18 @@ TOPICS = [
     "Encoder vs Decoder - What Changes Between BERT and GPT",
     "Transformer Training - Forward Pass, Loss, and Backprop",
 
-    # ── Generative AI & Fine-Tuning (Days 46–50) ─────────────────────────────
+    # ── LLM Inference & Sampling (Days 52–54) ────────────────────────────────
+    "Token Sampling - Temperature, Top-K, and Top-P",
+    "Prompt Engineering - Zero-Shot, Few-Shot, Chain-of-Thought",
+    "Context Window and KV Cache",
+
+    # ── Generative AI & Fine-Tuning (Days 55–60) ─────────────────────────────
     "LoRA (Low-Rank Adaptation) Fine-Tuning",
     "RLHF - Reinforcement Learning from Human Feedback",
     "Autoencoder and Latent Space",
     "Variational Autoencoder (VAE) Sampling",
     "Diffusion Models - Forward and Reverse Process",
+    "Convolutional Filter Sliding and Max Pooling (CNN)",
 ]
 
 
