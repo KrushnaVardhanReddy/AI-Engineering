@@ -16,4 +16,4 @@ dev-dist/
 build/
 ios/
 android/
-.venv/
+.venv/media/
