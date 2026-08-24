@@ -17,3 +17,6 @@ build/
 ios/
 android/
 .venv/
+media/
+animations/__pycache__/
+__pycache__/
