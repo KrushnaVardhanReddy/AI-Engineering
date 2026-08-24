@@ -50,3 +50,14 @@ merge:
 
 sync:
 	git pull origin main
+
+generate-manim:
+	.venv/bin/python3 scripts/generate_manim_prompts.py
+
+submit-manim-week:
+	@if [ -z "$(W)" ]; then echo "❌ Error: Week number (W) is required. Usage: make submit-manim-week W=1"; exit 1; fi
+	.venv/bin/python3 scripts/jules_submit.py --type manim --week $(W)
+
+submit-manim-day:
+	@if [ -z "$(D)" ]; then echo "❌ Error: Day number (D) is required. Usage: make submit-manim-day D=1"; exit 1; fi
+	.venv/bin/python3 scripts/jules_submit.py --type manim --day $(D)

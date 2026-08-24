@@ -1,0 +1,27 @@
+<PASTE MANDATORY RULES BLOCK>
+
+You are tasked with generating a Manim animation script for our AI/ML interview prep series.
+
+### Setup & Requirements
+- **Framework:** Manim Community Edition (`manim` package on PyPI, version >= 0.18.0). Do NOT use the legacy `manimlib` (3b1b) version.
+- **Python Version:** Python 3.10+
+- **Output Location:** Create the script inside the `animations/` directory.
+
+### The Task: Day 18
+Today's Topic: **Dropout Regularization**
+
+1. Write a Python script using the Manim Community API to visually explain this specific concept.
+2. The script must contain a `Scene` class.
+3. **Aesthetic Requirements (Whiteboard Style):** 
+   - Set the background color to pure white (`self.camera.background_color = WHITE`).
+   - Use black for primary text, equations, and shapes (`color=BLACK`).
+   - Use vibrant secondary colors (e.g., blue, red, green) for emphasis, avoiding light colors like yellow that are hard to see on white.
+4. Ensure the scene is clean, well-commented, and uses smooth transitions (`Transform`, `FadeIn`).
+5. Name the file logically: `animations/day_18_dropout_regularization.py`.
+
+### Code Constraints
+- Must include `from manim import *`
+- Do not use any deprecated functions from older manim versions.
+- Ensure the scene is self-contained.
+
+Commit: "jules: add manim animation script for day 18 - Dropout Regularization"

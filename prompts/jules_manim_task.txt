@@ -1,0 +1,21 @@
+<PASTE MANDATORY RULES BLOCK>
+
+You are tasked with generating a Manim animation script for our AI/ML interview prep series.
+
+### Setup & Requirements
+- **Framework:** Manim Community Edition (`manim` package on PyPI, version >= 0.18.0). Do NOT use the legacy `manimlib` (3b1b) version.
+- **Python Version:** Python 3.10+
+- **Output Location:** Create the script inside the `animations/` directory.
+
+### The Task
+1. Write a Python script using the Manim Community API to visually explain a core Machine Learning concept (e.g., Transformer Self-Attention, Vector Cosine Similarity, or Backpropagation).
+2. The script must contain a `Scene` class.
+3. Ensure the scene is clean, well-commented, and visually appealing. Use smooth transitions (`Transform`, `FadeIn`), distinct colors, and clear mathematical formulas using `Tex`.
+4. Name the file logically: `animations/[topic_name].py`.
+
+### Code Constraints
+- Must include `from manim import *`
+- Do not use any deprecated functions from older manim versions.
+- Ensure the scene is self-contained.
+
+Commit: "jules: add manim animation script for [topic]"
