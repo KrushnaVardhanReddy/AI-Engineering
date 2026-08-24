@@ -17,3 +17,5 @@ build/
 ios/
 android/
 .venv/
+# Manim generated files
+media/
