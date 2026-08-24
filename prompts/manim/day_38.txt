@@ -1,0 +1,59 @@
+<PASTE MANDATORY RULES BLOCK>
+
+You are tasked with generating a Manim animation script for our AI/ML interview prep series.
+
+### Setup & Requirements
+- **Framework:** Manim Community Edition (`manim` package on PyPI, version >= 0.18.0). Do NOT use the legacy `manimlib` (3b1b) version.
+- **Audio:** `manim-voiceover[gtts]` (install with `pip install manim-voiceover[gtts]`). Use `GTTSService` — it is free and requires no API key.
+- **Python Version:** Python 3.10+
+- **Output Location:** Create the script inside the `animations/` directory.
+
+### The Task: Day 38
+Today's Topic: **Self-Attention - How Q, K, V Are Computed from One Token**
+
+This is a **data-flow deep-dive** animation. You must use the example sentence **"The cat sat"** and trace how a real token travels through this specific stage of the Transformer — with narration explaining every step.
+
+Write a Python script using the Manim Community API. The animation must show:
+
+1. **Audio Narration (Required):**
+   - Inherit from `VoiceoverScene` instead of `Scene`.
+   - Call `self.set_speech_service(GTTSService())` at the start of `construct()`.
+   - Wrap every animation block in a `with self.voiceover(text="...") as tracker:` context manager.
+   - The spoken script must narrate exactly what is being shown (e.g., "Here, the token 'cat' is multiplied by the Query weight matrix W_Q to produce the query vector q").
+   - Required imports:
+     ```python
+     from manim import *
+     from manim_voiceover import VoiceoverScene
+     from manim_voiceover.services.gtts import GTTSService
+     ```
+
+2. **Input Setup** — Display the 3 tokens ["The", "cat", "sat"] as labeled boxes. Highlight the active token in BLUE. Narrate: "We start with three tokens..."
+
+3. **Data Flow — Step by Step (each step narrated):**
+   - Show the input vector/matrix arriving as an arrow into the current stage.
+   - Animate the internal computation (e.g., matrix multiply with W_Q/W_K/W_V, softmax) with small example numbers (2D or 3x3 matrices).
+   - Show which values **get updated** — highlight changed cells in GREEN.
+   - Show the output flowing out as an arrow to the next stage.
+
+4. **Forward Pass vs. Reverse (Backpropagation if applicable, narrated):**
+   - Show the forward pass first with solid arrows (narrate: "In the forward pass...").
+   - Then show the gradient/error signal flowing backward with dashed RED arrows (narrate: "During backprop, the gradient flows back...").
+   - Label which weights (W_Q, W_K, W_V, W_O, FFN weights) get updated.
+
+5. **Key Interview Insight** — End with a callout box and spoken summary of the most common interview "gotcha" for this stage.
+
+6. **Duration:** Use `self.wait(tracker.duration)` inside each `with self.voiceover(...)` block to sync audio and animation.
+
+7. **Aesthetic (Whiteboard Style):**
+   - Set background to white: `self.camera.background_color = WHITE`
+   - BLACK for labels and outlines. BLUE for input tokens, GREEN for forward-pass outputs, RED for gradients, PURPLE for weight matrices.
+   - Use `MathTex` for all matrix expressions.
+
+8. **Technical:**
+   - The script must contain a single `VoiceoverScene` subclass.
+   - Use only non-deprecated Manim Community >= 0.18.0 APIs.
+   - Smooth transitions only: `FadeIn`, `FadeOut`, `Write`, `Transform`, `MoveToTarget`.
+
+9. Name the file: `animations/day_38_self_attention___how_q_k_v_are_computed_from_one_token.py`
+
+Commit: "jules: add manim animation for day 38 - Self-Attention - How Q, K, V Are Computed from One Token"

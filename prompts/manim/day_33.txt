@@ -8,8 +8,8 @@ You are tasked with generating a Manim animation script for our AI/ML interview 
 - **Python Version:** Python 3.10+
 - **Output Location:** Create the script inside the `animations/` directory.
 
-### The Task: Day 16
-Today's Topic: **Retrieval-Augmented Generation (RAG) Flow**
+### The Task: Day 33
+Today's Topic: **RNN Sequential Bottleneck**
 
 Write a Python script using the Manim Community API. The animation must:
 
@@ -45,6 +45,6 @@ Write a Python script using the Manim Community API. The animation must:
    - The scene must be fully self-contained with no external assets.
    - Smooth transitions only: `FadeIn`, `FadeOut`, `Write`, `Transform`, `MoveToTarget`.
 
-6. Name the file: `animations/day_16_retrieval_augmented_generation_rag_flow.py`
+6. Name the file: `animations/day_33_rnn_sequential_bottleneck.py`
 
-Commit: "jules: add manim animation for day 16 - Retrieval-Augmented Generation (RAG) Flow"
+Commit: "jules: add manim animation for day 33 - RNN Sequential Bottleneck"
