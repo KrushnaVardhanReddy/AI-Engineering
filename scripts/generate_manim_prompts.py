@@ -36,7 +36,15 @@ Write a Python script using the Manim Community API. The animation must:
      from manim_voiceover.services.gtts import GTTSService
      ```
 
-3. **Duration:** Target ~90 seconds of animation. Let `tracker.duration` drive `self.wait(tracker.duration)` so audio and visuals stay in sync.
+3. **Depth & Duration (for personal deep learning):**
+   - Target **5–7 minutes** of animation. This is for self-study and interview prep — do not rush.
+   - Each narrative section should be thorough:
+     - **What is it?** — Define it clearly, then show it visually (not just a label, but an actual diagram or equation animating step by step).
+     - **Why do we need it?** — Show the problem WITHOUT the concept first, then show it again WITH the concept. Make the contrast obvious.
+     - **Use Cases** — Give 2 specific real-world examples with company names (e.g., "Google uses this in BERT for...").
+     - **Key Interview Insight** — Show the tradeoff or gotcha in a dedicated callout box. Take time on this — it's the most important part.
+   - Use `self.wait(1.5)` between sub-steps so the viewer can absorb each idea before moving on.
+   - For math equations: animate them being derived line by line using `MathTex` + `TransformMatchingTex`, not just appearing all at once.
 
 4. **Aesthetic (Whiteboard Style):**
    - Set background to white: `self.camera.background_color = WHITE`
@@ -100,7 +108,12 @@ Write a Python script using the Manim Community API. The animation must show:
 
 5. **Key Interview Insight** — End with a callout box and spoken summary of the most common interview "gotcha" for this stage.
 
-6. **Duration:** Use `self.wait(tracker.duration)` inside each `with self.voiceover(...)` block to sync audio and animation.
+6. **Depth & Duration (for personal deep learning):**
+   - Target **10–12 minutes** of animation. This is a deep technical reference — do not rush.
+   - Walk through the data flow slowly with pauses between each matrix operation.
+   - For each matrix multiplication, show the full operation: inputs on the left, weight matrix on top, output on the right. Animate cell-by-cell multiplication if possible.
+   - Use `self.wait(2)` after every key computation step so the viewer can absorb it.
+   - For backprop: show a full gradient derivation with `MathTex`, not just a dashed arrow.
 
 7. **Aesthetic (Whiteboard Style):**
    - Set background to white: `self.camera.background_color = WHITE`
@@ -119,6 +132,7 @@ Commit: "jules: add manim animation for day {day_num} - {topic}"
 
 # Tags to identify which topics need the deep-dive Transformer template
 TRANSFORMER_DAYS = {
+    "Attention Masking - Padding Masks vs Causal Masks",      # Bug fix: was missing
     "Transformer Architecture Overview - End-to-End Data Flow",
     "Tokenization and Input Embedding - How Text Becomes Numbers",
     "Positional Encoding - Injecting Order into Embeddings",
@@ -126,13 +140,14 @@ TRANSFORMER_DAYS = {
     "Attention Score Calculation - Softmax and Weighted Sum",
     "Multi-Head Attention - Parallel Heads and Concatenation",
     "Feed-Forward Layer Inside the Transformer Block",
+    "Flash Attention - Memory-Efficient Attention Computation",
     "Encoder Stack - How Data Flows Through All 6 Layers",
     "Decoder Stack - Masked Attention and Cross-Attention Explained",
     "Encoder vs Decoder - What Changes Between BERT and GPT",
     "Transformer Training - Forward Pass, Loss, and Backprop",
 }
 
-# 60 micro-topics — sorted from math foundations → classical ML → deep learning → Transformers → LLM/GenAI
+# 65 micro-topics — sorted from math foundations → classical ML → deep learning → Transformers → LLM/GenAI
 TOPICS = [
     # ── Math & Vector Foundations (Days 1–6) ─────────────────────────────────
     "Vector Basics and Coordinates",
@@ -173,12 +188,13 @@ TOPICS = [
     "AUC-ROC Curve Explained",
     "t-SNE for High-Dimensional Visualization",
 
-    # ── Core Deep Learning (Days 30–38) ──────────────────────────────────────
+    # ── Core Deep Learning (Days 30–40) ──────────────────────────────────────
     "Introduction to Neural Networks",
     "Activation Functions (ReLU, Sigmoid, Tanh)",
     "Vanishing Gradient Problem",
     "Gradient Descent - SGD vs Adam vs RMSProp",
     "Learning Rate Schedulers - Warmup and Cosine Decay",
+    "Gradient Clipping - Preventing Exploding Gradients",
     "Backpropagation Chain Rule",
     "Batch Normalization vs Layer Normalization",
     "Dropout Regularization",
@@ -188,31 +204,36 @@ TOPICS = [
     "RNN Sequential Bottleneck",
     "LSTM and the Gating Mechanism",
 
-    # ── Transformer Deep-Dive: Data Flow (Days 41–51) ─────────────────────────
+    # ── Transformer Deep-Dive: Data Flow (Days 42–53) ─────────────────────────
     "Transformer Architecture Overview - End-to-End Data Flow",
     "Tokenization and Input Embedding - How Text Becomes Numbers",
     "Positional Encoding - Injecting Order into Embeddings",
     "Self-Attention - How Q, K, V Are Computed from One Token",
     "Attention Score Calculation - Softmax and Weighted Sum",
     "Multi-Head Attention - Parallel Heads and Concatenation",
+    "Flash Attention - Memory-Efficient Attention Computation",
     "Feed-Forward Layer Inside the Transformer Block",
     "Encoder Stack - How Data Flows Through All 6 Layers",
     "Decoder Stack - Masked Attention and Cross-Attention Explained",
     "Encoder vs Decoder - What Changes Between BERT and GPT",
     "Transformer Training - Forward Pass, Loss, and Backprop",
 
-    # ── LLM Inference & Sampling (Days 52–54) ────────────────────────────────
+    # ── LLM Inference & Sampling (Days 54–57) ────────────────────────────────
     "Token Sampling - Temperature, Top-K, and Top-P",
+    "Beam Search - Sequence Generation Strategy",
     "Prompt Engineering - Zero-Shot, Few-Shot, Chain-of-Thought",
     "Context Window and KV Cache",
 
-    # ── Generative AI & Fine-Tuning (Days 55–60) ─────────────────────────────
+    # ── Agentic AI (Days 58–60) ───────────────────────────────────────────────
+    "ReAct Agent Loop - Reasoning and Acting with LLMs",
+    "Model Quantization - INT8 and INT4 for Production",
+
+    # ── Generative AI & Fine-Tuning (Days 61–65) ─────────────────────────────
     "LoRA (Low-Rank Adaptation) Fine-Tuning",
     "RLHF - Reinforcement Learning from Human Feedback",
     "Autoencoder and Latent Space",
     "Variational Autoencoder (VAE) Sampling",
     "Diffusion Models - Forward and Reverse Process",
-    "Convolutional Filter Sliding and Max Pooling (CNN)",
 ]
 
 

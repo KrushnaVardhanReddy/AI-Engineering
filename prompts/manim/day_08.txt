@@ -31,7 +31,15 @@ Write a Python script using the Manim Community API. The animation must:
      from manim_voiceover.services.gtts import GTTSService
      ```
 
-3. **Duration:** Target ~90 seconds of animation. Let `tracker.duration` drive `self.wait(tracker.duration)` so audio and visuals stay in sync.
+3. **Depth & Duration (for personal deep learning):**
+   - Target **5–7 minutes** of animation. This is for self-study and interview prep — do not rush.
+   - Each narrative section should be thorough:
+     - **What is it?** — Define it clearly, then show it visually (not just a label, but an actual diagram or equation animating step by step).
+     - **Why do we need it?** — Show the problem WITHOUT the concept first, then show it again WITH the concept. Make the contrast obvious.
+     - **Use Cases** — Give 2 specific real-world examples with company names (e.g., "Google uses this in BERT for...").
+     - **Key Interview Insight** — Show the tradeoff or gotcha in a dedicated callout box. Take time on this — it's the most important part.
+   - Use `self.wait(1.5)` between sub-steps so the viewer can absorb each idea before moving on.
+   - For math equations: animate them being derived line by line using `MathTex` + `TransformMatchingTex`, not just appearing all at once.
 
 4. **Aesthetic (Whiteboard Style):**
    - Set background to white: `self.camera.background_color = WHITE`

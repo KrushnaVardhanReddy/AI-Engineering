@@ -9,21 +9,17 @@ You are tasked with generating a Manim animation script for our AI/ML interview 
 - **Output Location:** Create the script inside the `animations/` directory.
 
 ### The Task: Day 53
-Today's Topic: **Prompt Engineering - Zero-Shot, Few-Shot, Chain-of-Thought**
+Today's Topic: **Transformer Training - Forward Pass, Loss, and Backprop**
 
-Write a Python script using the Manim Community API. The animation must:
+This is a **data-flow deep-dive** animation. You must use the example sentence **"The cat sat"** and trace how a real token travels through this specific stage of the Transformer — with narration explaining every step.
 
-1. **Follow this exact narrative structure** (each section displayed as animated text + diagrams, each section narrated aloud):
-   - **What is it?** — A clear 1-sentence definition (spoken + shown on screen).
-   - **Why do we need it?** — The specific problem it solves, with a "before vs. after" visual if applicable (spoken + shown).
-   - **Use Cases** — 2 real-world examples, e.g., "ChatGPT uses X, Spotify uses Y" (spoken + shown).
-   - **Key Interview Insight** — The most common "gotcha" or tradeoff interviewers test (spoken + shown in a callout box).
+Write a Python script using the Manim Community API. The animation must show:
 
-2. **Audio Narration (Required):**
+1. **Audio Narration (Required):**
    - Inherit from `VoiceoverScene` instead of `Scene`.
    - Call `self.set_speech_service(GTTSService())` at the start of `construct()`.
    - Wrap every animation block in a `with self.voiceover(text="...") as tracker:` context manager.
-   - The spoken script must match what is shown on screen.
+   - The spoken script must narrate exactly what is being shown (e.g., "Here, the token 'cat' is multiplied by the Query weight matrix W_Q to produce the query vector q").
    - Required imports:
      ```python
      from manim import *
@@ -31,20 +27,38 @@ Write a Python script using the Manim Community API. The animation must:
      from manim_voiceover.services.gtts import GTTSService
      ```
 
-3. **Duration:** Target ~90 seconds of animation. Let `tracker.duration` drive `self.wait(tracker.duration)` so audio and visuals stay in sync.
+2. **Input Setup** — Display the 3 tokens ["The", "cat", "sat"] as labeled boxes. Highlight the active token in BLUE. Narrate: "We start with three tokens..."
 
-4. **Aesthetic (Whiteboard Style):**
+3. **Data Flow — Step by Step (each step narrated):**
+   - Show the input vector/matrix arriving as an arrow into the current stage.
+   - Animate the internal computation (e.g., matrix multiply with W_Q/W_K/W_V, softmax) with small example numbers (2D or 3x3 matrices).
+   - Show which values **get updated** — highlight changed cells in GREEN.
+   - Show the output flowing out as an arrow to the next stage.
+
+4. **Forward Pass vs. Reverse (Backpropagation if applicable, narrated):**
+   - Show the forward pass first with solid arrows (narrate: "In the forward pass...").
+   - Then show the gradient/error signal flowing backward with dashed RED arrows (narrate: "During backprop, the gradient flows back...").
+   - Label which weights (W_Q, W_K, W_V, W_O, FFN weights) get updated.
+
+5. **Key Interview Insight** — End with a callout box and spoken summary of the most common interview "gotcha" for this stage.
+
+6. **Depth & Duration (for personal deep learning):**
+   - Target **10–12 minutes** of animation. This is a deep technical reference — do not rush.
+   - Walk through the data flow slowly with pauses between each matrix operation.
+   - For each matrix multiplication, show the full operation: inputs on the left, weight matrix on top, output on the right. Animate cell-by-cell multiplication if possible.
+   - Use `self.wait(2)` after every key computation step so the viewer can absorb it.
+   - For backprop: show a full gradient derivation with `MathTex`, not just a dashed arrow.
+
+7. **Aesthetic (Whiteboard Style):**
    - Set background to white: `self.camera.background_color = WHITE`
-   - Use BLACK for all primary text and outlines.
-   - Use vibrant accent colors (BLUE, RED, GREEN, PURPLE) for highlights and emphasis. Avoid light colors (YELLOW, LIGHT_GRAY) that are hard to see on white.
-   - Use `Tex` or `MathTex` for all mathematical expressions.
+   - BLACK for labels and outlines. BLUE for input tokens, GREEN for forward-pass outputs, RED for gradients, PURPLE for weight matrices.
+   - Use `MathTex` for all matrix expressions.
 
-5. **Technical:**
+8. **Technical:**
    - The script must contain a single `VoiceoverScene` subclass.
    - Use only non-deprecated Manim Community >= 0.18.0 APIs.
-   - The scene must be fully self-contained with no external assets.
    - Smooth transitions only: `FadeIn`, `FadeOut`, `Write`, `Transform`, `MoveToTarget`.
 
-6. Name the file: `animations/day_53_prompt_engineering___zero_shot_few_shot_chain_of_thought.py`
+9. Name the file: `animations/day_53_transformer_training___forward_pass_loss_and_backprop.py`
 
-Commit: "jules: add manim animation for day 53 - Prompt Engineering - Zero-Shot, Few-Shot, Chain-of-Thought"
+Commit: "jules: add manim animation for day 53 - Transformer Training - Forward Pass, Loss, and Backprop"

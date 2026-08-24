@@ -1,4 +1,4 @@
-.PHONY: help setup jupyter generate generate-cheatsheets submit-week submit-day submit-cheatsheet-week submit-cheatsheet-day merge sync
+.PHONY: help setup jupyter generate generate-cheatsheets submit-week submit-day submit-cheatsheet-week submit-cheatsheet-day merge sync generate-manim submit-manim-week submit-manim-day
 
 help:
 	@echo "AI Engineering Mastery - Makefile"
@@ -14,6 +14,11 @@ help:
 	@echo "  make submit-cheatsheet-day D=1  - Submit day's cheatsheet prompt to Jules"
 	@echo "  make merge S=1 E=7       - Merge a batch of PRs (Start to End) from Jules"
 	@echo "  make sync                - Pull latest changes from origin main"
+	@echo ""
+	@echo "Manim Animations:"
+	@echo "  make generate-manim       - Regenerate all 65 Manim prompt files"
+	@echo "  make submit-manim-week W=1 - Submit a week of Manim prompts to Jules"
+	@echo "  make submit-manim-day D=1  - Submit a specific Manim day to Jules"
 
 setup:
 	uv venv

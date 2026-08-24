@@ -9,17 +9,21 @@ You are tasked with generating a Manim animation script for our AI/ML interview 
 - **Output Location:** Create the script inside the `animations/` directory.
 
 ### The Task: Day 41
-Today's Topic: **Transformer Architecture Overview - End-to-End Data Flow**
+Today's Topic: **LSTM and the Gating Mechanism**
 
-This is a **data-flow deep-dive** animation. You must use the example sentence **"The cat sat"** and trace how a real token travels through this specific stage of the Transformer — with narration explaining every step.
+Write a Python script using the Manim Community API. The animation must:
 
-Write a Python script using the Manim Community API. The animation must show:
+1. **Follow this exact narrative structure** (each section displayed as animated text + diagrams, each section narrated aloud):
+   - **What is it?** — A clear 1-sentence definition (spoken + shown on screen).
+   - **Why do we need it?** — The specific problem it solves, with a "before vs. after" visual if applicable (spoken + shown).
+   - **Use Cases** — 2 real-world examples, e.g., "ChatGPT uses X, Spotify uses Y" (spoken + shown).
+   - **Key Interview Insight** — The most common "gotcha" or tradeoff interviewers test (spoken + shown in a callout box).
 
-1. **Audio Narration (Required):**
+2. **Audio Narration (Required):**
    - Inherit from `VoiceoverScene` instead of `Scene`.
    - Call `self.set_speech_service(GTTSService())` at the start of `construct()`.
    - Wrap every animation block in a `with self.voiceover(text="...") as tracker:` context manager.
-   - The spoken script must narrate exactly what is being shown (e.g., "Here, the token 'cat' is multiplied by the Query weight matrix W_Q to produce the query vector q").
+   - The spoken script must match what is shown on screen.
    - Required imports:
      ```python
      from manim import *
@@ -27,33 +31,28 @@ Write a Python script using the Manim Community API. The animation must show:
      from manim_voiceover.services.gtts import GTTSService
      ```
 
-2. **Input Setup** — Display the 3 tokens ["The", "cat", "sat"] as labeled boxes. Highlight the active token in BLUE. Narrate: "We start with three tokens..."
+3. **Depth & Duration (for personal deep learning):**
+   - Target **5–7 minutes** of animation. This is for self-study and interview prep — do not rush.
+   - Each narrative section should be thorough:
+     - **What is it?** — Define it clearly, then show it visually (not just a label, but an actual diagram or equation animating step by step).
+     - **Why do we need it?** — Show the problem WITHOUT the concept first, then show it again WITH the concept. Make the contrast obvious.
+     - **Use Cases** — Give 2 specific real-world examples with company names (e.g., "Google uses this in BERT for...").
+     - **Key Interview Insight** — Show the tradeoff or gotcha in a dedicated callout box. Take time on this — it's the most important part.
+   - Use `self.wait(1.5)` between sub-steps so the viewer can absorb each idea before moving on.
+   - For math equations: animate them being derived line by line using `MathTex` + `TransformMatchingTex`, not just appearing all at once.
 
-3. **Data Flow — Step by Step (each step narrated):**
-   - Show the input vector/matrix arriving as an arrow into the current stage.
-   - Animate the internal computation (e.g., matrix multiply with W_Q/W_K/W_V, softmax) with small example numbers (2D or 3x3 matrices).
-   - Show which values **get updated** — highlight changed cells in GREEN.
-   - Show the output flowing out as an arrow to the next stage.
-
-4. **Forward Pass vs. Reverse (Backpropagation if applicable, narrated):**
-   - Show the forward pass first with solid arrows (narrate: "In the forward pass...").
-   - Then show the gradient/error signal flowing backward with dashed RED arrows (narrate: "During backprop, the gradient flows back...").
-   - Label which weights (W_Q, W_K, W_V, W_O, FFN weights) get updated.
-
-5. **Key Interview Insight** — End with a callout box and spoken summary of the most common interview "gotcha" for this stage.
-
-6. **Duration:** Use `self.wait(tracker.duration)` inside each `with self.voiceover(...)` block to sync audio and animation.
-
-7. **Aesthetic (Whiteboard Style):**
+4. **Aesthetic (Whiteboard Style):**
    - Set background to white: `self.camera.background_color = WHITE`
-   - BLACK for labels and outlines. BLUE for input tokens, GREEN for forward-pass outputs, RED for gradients, PURPLE for weight matrices.
-   - Use `MathTex` for all matrix expressions.
+   - Use BLACK for all primary text and outlines.
+   - Use vibrant accent colors (BLUE, RED, GREEN, PURPLE) for highlights and emphasis. Avoid light colors (YELLOW, LIGHT_GRAY) that are hard to see on white.
+   - Use `Tex` or `MathTex` for all mathematical expressions.
 
-8. **Technical:**
+5. **Technical:**
    - The script must contain a single `VoiceoverScene` subclass.
    - Use only non-deprecated Manim Community >= 0.18.0 APIs.
+   - The scene must be fully self-contained with no external assets.
    - Smooth transitions only: `FadeIn`, `FadeOut`, `Write`, `Transform`, `MoveToTarget`.
 
-9. Name the file: `animations/day_41_transformer_architecture_overview___end_to_end_data_flow.py`
+6. Name the file: `animations/day_41_lstm_and_the_gating_mechanism.py`
 
-Commit: "jules: add manim animation for day 41 - Transformer Architecture Overview - End-to-End Data Flow"
+Commit: "jules: add manim animation for day 41 - LSTM and the Gating Mechanism"

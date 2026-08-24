@@ -9,7 +9,7 @@ You are tasked with generating a Manim animation script for our AI/ML interview 
 - **Output Location:** Create the script inside the `animations/` directory.
 
 ### The Task: Day 47
-Today's Topic: **Feed-Forward Layer Inside the Transformer Block**
+Today's Topic: **Multi-Head Attention - Parallel Heads and Concatenation**
 
 This is a **data-flow deep-dive** animation. You must use the example sentence **"The cat sat"** and trace how a real token travels through this specific stage of the Transformer — with narration explaining every step.
 
@@ -42,7 +42,12 @@ Write a Python script using the Manim Community API. The animation must show:
 
 5. **Key Interview Insight** — End with a callout box and spoken summary of the most common interview "gotcha" for this stage.
 
-6. **Duration:** Use `self.wait(tracker.duration)` inside each `with self.voiceover(...)` block to sync audio and animation.
+6. **Depth & Duration (for personal deep learning):**
+   - Target **10–12 minutes** of animation. This is a deep technical reference — do not rush.
+   - Walk through the data flow slowly with pauses between each matrix operation.
+   - For each matrix multiplication, show the full operation: inputs on the left, weight matrix on top, output on the right. Animate cell-by-cell multiplication if possible.
+   - Use `self.wait(2)` after every key computation step so the viewer can absorb it.
+   - For backprop: show a full gradient derivation with `MathTex`, not just a dashed arrow.
 
 7. **Aesthetic (Whiteboard Style):**
    - Set background to white: `self.camera.background_color = WHITE`
@@ -54,6 +59,6 @@ Write a Python script using the Manim Community API. The animation must show:
    - Use only non-deprecated Manim Community >= 0.18.0 APIs.
    - Smooth transitions only: `FadeIn`, `FadeOut`, `Write`, `Transform`, `MoveToTarget`.
 
-9. Name the file: `animations/day_47_feed_forward_layer_inside_the_transformer_block.py`
+9. Name the file: `animations/day_47_multi_head_attention___parallel_heads_and_concatenation.py`
 
-Commit: "jules: add manim animation for day 47 - Feed-Forward Layer Inside the Transformer Block"
+Commit: "jules: add manim animation for day 47 - Multi-Head Attention - Parallel Heads and Concatenation"
