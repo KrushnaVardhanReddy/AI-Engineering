@@ -20,4 +20,5 @@ android/
 # Media
 media/
 __pycache__/
+.venv/media/
 animations/__pycache__/
