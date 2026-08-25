@@ -17,10 +17,9 @@ build/
 ios/
 android/
 .venv/
+# Manim generated files
 media/
 animations/__pycache__/
 # Media
-media/
 __pycache__/
 .venv/media/
-animations/__pycache__/
