@@ -19,3 +19,5 @@ android/
 .venv/
 # Manim generated files
 media/
+.venv/media/
+animations/__pycache__/
