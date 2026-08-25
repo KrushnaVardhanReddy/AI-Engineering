@@ -22,7 +22,7 @@ help:
 
 setup:
 	uv venv
-	uv pip install jupyterlab pydantic fastapi uvicorn streamlit groq ipykernel
+	uv pip install jupyterlab pydantic fastapi uvicorn streamlit groq ipykernel manim manim-voiceover gTTS
 
 jupyter:
 	.venv/bin/jupyter lab modules/index.ipynb
@@ -66,3 +66,17 @@ submit-manim-week:
 submit-manim-day:
 	@if [ -z "$(D)" ]; then echo "❌ Error: Day number (D) is required. Usage: make submit-manim-day D=1"; exit 1; fi
 	.venv/bin/python3 scripts/jules_submit.py --type manim --day $(D)
+
+run-manim:
+	@if [ -n "$(D)" ]; then \
+		DAY=$$(printf "%02d" $(D)); \
+		FILE=$$(ls animations/day_$${DAY}_*.py 2>/dev/null); \
+		if [ -z "$$FILE" ]; then echo "❌ Error: Day $(D) not found in animations/"; exit 1; fi; \
+		.venv/bin/manim -ql $$FILE; \
+	else \
+		for file in animations/day_*.py; do \
+			if [ -f "$$file" ]; then \
+				.venv/bin/manim -ql $$file; \
+			fi \
+		done; \
+	fi
