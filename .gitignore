@@ -23,5 +23,4 @@ animations/__pycache__/
 # Media
 __pycache__/
 .venv/media/
-
 media/
