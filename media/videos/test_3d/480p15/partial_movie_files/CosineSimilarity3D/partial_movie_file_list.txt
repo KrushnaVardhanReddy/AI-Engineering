@@ -1,6 +1,0 @@
-# This file is used internally by FFMPEG.
-file 'file:/app/media/videos/test_3d/480p15/partial_movie_files/CosineSimilarity3D/4178318820_2519867988_421987787.mp4'
-file 'file:/app/media/videos/test_3d/480p15/partial_movie_files/CosineSimilarity3D/3152958062_238214334_311977478.mp4'
-file 'file:/app/media/videos/test_3d/480p15/partial_movie_files/CosineSimilarity3D/243147401_2442647573_3416956423.mp4'
-file 'file:/app/media/videos/test_3d/480p15/partial_movie_files/CosineSimilarity3D/243147401_2987762134_2233194722.mp4'
-file 'file:/app/media/videos/test_3d/480p15/partial_movie_files/CosineSimilarity3D/243147401_2613407950_2138157518.mp4'
