@@ -76,7 +76,13 @@ run-manim:
 	else \
 		for file in animations/day_*.py; do \
 			if [ -f "$$file" ]; then \
-				.venv/bin/manim -ql $$file; \
+				BASENAME=$$(basename "$$file" .py); \
+				if ls media/videos/$$BASENAME/480p15/*.mp4 >/dev/null 2>&1; then \
+					echo "⏭️ Skipping $$file (already rendered)"; \
+				else \
+					echo "🎬 Rendering $$file"; \
+					.venv/bin/manim -ql "$$file" || exit 1; \
+				fi; \
 			fi \
 		done; \
 	fi

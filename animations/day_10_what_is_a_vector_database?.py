@@ -276,7 +276,7 @@ class VectorDatabaseExplained(VoiceoverScene):
             callout_box = Rectangle(width=10, height=3, color=BLUE, fill_color=BLUE, fill_opacity=0.1).next_to(knn_text, DOWN, buff=1)
 
             insight_title = Text("The Tradeoff: A-N-N", color=BLUE, font_size=36, weight=BOLD).move_to(callout_box.get_top() + DOWN*0.5)
-            insight_desc = Text("We trade perfect accuracy for immense speed\nusing Approximate Nearest Neighbors (e.g., HNSW).", color=BLACK, font_size=28, text_align="center").next_to(insight_title, DOWN, buff=0.5)
+            insight_desc = Text("We trade perfect accuracy for immense speed\nusing Approximate Nearest Neighbors (e.g., HNSW).", color=BLACK, font_size=28).next_to(insight_title, DOWN, buff=0.5)
 
             self.play(Create(callout_box))
             self.play(Write(insight_title))
